@@ -96,7 +96,7 @@ public class Player : MonoBehaviour
     void FireLaser()
     {
         // offset for laser spawning, +0.8 on y axis
-        Vector3 offset = new Vector3(0, 0.8f, 0);
+        Vector3 offset = new Vector3(0, 1.05f, 0);
 
         // if i hit the space key
         // spawn gameObject (laser prefab)
