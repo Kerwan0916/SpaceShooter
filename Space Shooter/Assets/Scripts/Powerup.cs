@@ -7,11 +7,7 @@ public class Powerup : MonoBehaviour
 {
     [SerializeField] 
     private float _speed = 3.0f;
-    // ID for powerups 
-    // 0 = triple shot
-    // 1 = speed
-    // 2 = shields
-    [SerializeField]
+    [SerializeField] // 0 = triple shot 1 = speed 2 = shields
     private int powerupID;
 
 
@@ -40,15 +36,40 @@ public class Powerup : MonoBehaviour
             // create a handle to the component i want
             // assign the handle to the component
             Player player = other.transform.GetComponent<Player>();
-            if (player != null)
-            {
-                if (powerupID == 0)
+
+
+            //if (player != null)
+            //{
+            //    if (powerupID == 0)
+            //    {
+            //        player.TripleShotActive();
+            //    }
+            //    else if (powerupID == 1)
+            //    {
+            //        //player.SpeedBoostActive();
+            //        Debug.Log("Collected Speed Boost");
+            //    }
+            //    else if (powerupID == 2)
+            //    {
+            //        Debug.Log("Shields Collected");
+            //    }
+            //}
+
+                switch(powerupID)
                 {
-                    player.TripleShotActive();
-                }//else if (powerupID == 1) {
-                 // player.Speed
-                // ekse if (powerupID == 2) { player.shieldsactivate
-            }
+                    case 0:
+                        player.TripleShotActive();
+                        break;
+                    case 1:
+                        Debug.Log("Collected Speed Boost");
+                        break;
+                    case 2:
+                        Debug.Log("Shields Collected");
+                        break;
+                    default:
+                        Debug.Log("Default State");
+                        break;
+                }
             Destroy(this.gameObject);
         }
     }

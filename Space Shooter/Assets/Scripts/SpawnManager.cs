@@ -11,6 +11,8 @@ public class SpawnManager : MonoBehaviour
     private bool _stopSpawning;
     [SerializeField]
     private GameObject _tripleShotPowerupPrefab;
+    [SerializeField]
+    private GameObject _speedBoostPowerupPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -46,8 +48,12 @@ public class SpawnManager : MonoBehaviour
         {
             // every 3-7 seconds, spawn in a powerup
             Vector3 posToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
+            
             Instantiate(_tripleShotPowerupPrefab, posToSpawn, Quaternion.identity);
             yield return new WaitForSeconds(Random.Range(3,8));
+
+            Instantiate(_speedBoostPowerupPrefab, posToSpawn, Quaternion.identity);
+            yield return new WaitForSeconds(Random.Range(3, 8));
         }
     }
 
