@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -10,6 +11,7 @@ public class Player : MonoBehaviour
     // optional value assigned
     [SerializeField]
     private float _speed = 3.5f;
+    private float _speedMultiplier = 2;
     [SerializeField]
     private GameObject _laserPrefab;
     [SerializeField]
@@ -69,31 +71,33 @@ public class Player : MonoBehaviour
 
         // optimized version
         Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
+
+        // if speed boost active is false
         transform.Translate(direction * _speed * Time.deltaTime);
+        // else speed boost multiplier
         //if (_isSpeedBoostActive == true)
         //{
          //   _speed = 16f;
         //}
 
 
+            // MOVEMENT LIMITS AND MAP BOUNDS
+            // if player.position.y > 0
+            // then y position = 0
+            // else if position on the y is less than -3.8f
+            // then y = pos. -3.8f
 
-        // MOVEMENT LIMITS AND MAP BOUNDS
-        // if player.position.y > 0
-        // then y position = 0
-        // else if position on the y is less than -3.8f
-        // then y = pos. -3.8f
+            //if (transform.position.y >= 0)
+            //{
+            //    transform.position = new Vector3(transform.position.x, 0, 0);
+            //}
+            //else if (transform.position.y <= -3.8f)
+            //{
+            //    transform.position = new Vector3(transform.position.x, -3.8f, 0);
+            //}
 
-        //if (transform.position.y >= 0)
-        //{
-        //    transform.position = new Vector3(transform.position.x, 0, 0);
-        //}
-        //else if (transform.position.y <= -3.8f)
-        //{
-        //    transform.position = new Vector3(transform.position.x, -3.8f, 0);
-        //}
-
-        // optimized version
-        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.8f, 0), 0);
+            // optimized version
+            transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.8f, 0), 0);
 
 
         if (transform.position.x >= 11.28f)
@@ -167,15 +171,17 @@ public class Player : MonoBehaviour
         _isTripleShotActive = false;
     }
 
-    //public void SpeedBoostActive()
-    //{
-    //    _isSpeedBoostActive = true;
-    //    StartCoroutine(SpeedBoostPowerDownRoutine());
-   // }
+    public void SpeedBoostActive()
+    {
+        _isSpeedBoostActive = true;
+        _speed *= _speedMultiplier;
+        StartCoroutine(SpeedBoostPowerDownRoutine());
+    }
 
-    //IEnumerator SpeedBoostPowerDownRoutine()
-    //{
-     //   yield return new WaitForSeconds(5.0f);
-      //  _isSpeedBoostActive = false;
-   // }
+    IEnumerator SpeedBoostPowerDownRoutine()
+    {
+        yield return new WaitForSeconds(5.0f);
+        _speed /= _speedMultiplier;
+        _isSpeedBoostActive = false;
+    }
 }

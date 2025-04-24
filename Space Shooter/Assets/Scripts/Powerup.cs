@@ -38,30 +38,31 @@ public class Powerup : MonoBehaviour
             Player player = other.transform.GetComponent<Player>();
 
 
-            //if (player != null)
-            //{
-            //    if (powerupID == 0)
-            //    {
-            //        player.TripleShotActive();
-            //    }
-            //    else if (powerupID == 1)
-            //    {
-            //        //player.SpeedBoostActive();
-            //        Debug.Log("Collected Speed Boost");
-            //    }
-            //    else if (powerupID == 2)
-            //    {
-            //        Debug.Log("Shields Collected");
-            //    }
-            //}
+            if (player != null)
+            {
+                //    if (powerupID == 0)
+                //    {
+                //        player.TripleShotActive();
+                //    }
+                //    else if (powerupID == 1)
+                //    {
+                //        //player.SpeedBoostActive();
+                //        Debug.Log("Collected Speed Boost");
+                //    }
+                //    else if (powerupID == 2)
+                //    {
+                //        Debug.Log("Shields Collected");
+                //    }
+                //}
 
-                switch(powerupID)
+                switch (powerupID)
                 {
                     case 0:
                         player.TripleShotActive();
                         break;
                     case 1:
                         Debug.Log("Collected Speed Boost");
+                        player.SpeedBoostActive();
                         break;
                     case 2:
                         Debug.Log("Shields Collected");
@@ -70,7 +71,8 @@ public class Powerup : MonoBehaviour
                         Debug.Log("Default State");
                         break;
                 }
-            Destroy(this.gameObject);
+                Destroy(this.gameObject);
+            }
         }
     }
 

@@ -10,15 +10,13 @@ public class SpawnManager : MonoBehaviour
     private GameObject _enemyContainer;
     private bool _stopSpawning;
     [SerializeField]
-    private GameObject _tripleShotPowerupPrefab;
-    [SerializeField]
-    private GameObject _speedBoostPowerupPrefab;
+    private GameObject[] powerups;
 
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(SpawnEnemyRoutine());
-        StartCoroutine(SpawnPowerupRoutine()); 
+        StartCoroutine(SpawnPowerupRoutine());
     }
 
     // Spawn game objects every 5 seconds
@@ -48,12 +46,10 @@ public class SpawnManager : MonoBehaviour
         {
             // every 3-7 seconds, spawn in a powerup
             Vector3 posToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
-            
-            Instantiate(_tripleShotPowerupPrefab, posToSpawn, Quaternion.identity);
-            yield return new WaitForSeconds(Random.Range(3,8));
+            int randomPowerUp = Random.Range(0, 2);
 
-            Instantiate(_speedBoostPowerupPrefab, posToSpawn, Quaternion.identity);
-            yield return new WaitForSeconds(Random.Range(3, 8));
+            Instantiate(powerups[randomPowerUp], posToSpawn, Quaternion.identity);
+            yield return new WaitForSeconds(Random.Range(3,8));
         }
     }
 
