@@ -58,6 +58,7 @@ public class Powerup : MonoBehaviour
                 switch (powerupID)
                 {
                     case 0:
+                        Debug.Log("TripleShot Collected");
                         player.TripleShotActive();
                         break;
                     case 1:
@@ -66,6 +67,7 @@ public class Powerup : MonoBehaviour
                         break;
                     case 2:
                         Debug.Log("Shields Collected");
+                        player.ShieldsActive();
                         break;
                     default:
                         Debug.Log("Default State");

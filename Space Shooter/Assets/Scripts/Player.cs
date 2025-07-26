@@ -16,6 +16,9 @@ public class Player : MonoBehaviour
     private GameObject _laserPrefab;
     [SerializeField]
     private GameObject _tripleShotPrefab;
+    // variable ref to visualizer
+    [SerializeField]
+    private GameObject _shieldsVisualizer;
     [SerializeField]
     private float _fireRate = 0.5f;
     private float _canFire = -1f;
@@ -29,6 +32,9 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private bool _isSpeedBoostActive = false;
+
+    [SerializeField]
+    private bool _isShieldsActive = false;
 
 
     // Start is called before the first frame update
@@ -77,27 +83,27 @@ public class Player : MonoBehaviour
         // else speed boost multiplier
         //if (_isSpeedBoostActive == true)
         //{
-         //   _speed = 16f;
+        //   _speed = 16f;
         //}
 
 
-            // MOVEMENT LIMITS AND MAP BOUNDS
-            // if player.position.y > 0
-            // then y position = 0
-            // else if position on the y is less than -3.8f
-            // then y = pos. -3.8f
+        // MOVEMENT LIMITS AND MAP BOUNDS
+        // if player.position.y > 0
+        // then y position = 0
+        // else if position on the y is less than -3.8f
+        // then y = pos. -3.8f
 
-            //if (transform.position.y >= 0)
-            //{
-            //    transform.position = new Vector3(transform.position.x, 0, 0);
-            //}
-            //else if (transform.position.y <= -3.8f)
-            //{
-            //    transform.position = new Vector3(transform.position.x, -3.8f, 0);
-            //}
+        //if (transform.position.y >= 0)
+        //{
+        //    transform.position = new Vector3(transform.position.x, 0, 0);
+        //}
+        //else if (transform.position.y <= -3.8f)
+        //{
+        //    transform.position = new Vector3(transform.position.x, -3.8f, 0);
+        //}
 
-            // optimized version
-            transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.8f, 0), 0);
+        // optimized version
+        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.8f, 0), 0);
 
 
         if (transform.position.x >= 11.28f)
@@ -124,7 +130,7 @@ public class Player : MonoBehaviour
 
         // if space key is pressed
         // if tripleshotActive is true
-            // fire 3 lasers (instantiate triple shot prefab)
+        // fire 3 lasers (instantiate triple shot prefab)
         // else fire 1 laser
 
         if (_isTripleShotActive == true)
@@ -135,14 +141,27 @@ public class Player : MonoBehaviour
         {
             Instantiate(_laserPrefab, transform.position + offset, Quaternion.identity);
         }
-        
+
     }
 
     public void Damage()
     {
+        // if shields is active
+        // do nothing...
+        // deactivate shields
+        // return;
+        if (_isShieldsActive == true)
+        {
+            _isShieldsActive = false;
+            // disable visualizer
+            _shieldsVisualizer.SetActive(false);
+            return;
+        }
+
         // removes a life
         // _lives -= 1; also works
         _lives--;
+
 
         // check if dead
         if (_lives < 1)
@@ -183,5 +202,20 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(5.0f);
         _speed /= _speedMultiplier;
         _isSpeedBoostActive = false;
+    }
+
+    public void ShieldsActive()
+    {
+        _isShieldsActive = true;
+        // enable visualizer
+        _shieldsVisualizer.SetActive(true);
+        StartCoroutine(ShieldsPowerDownRoutine());
+    }
+
+    IEnumerator ShieldsPowerDownRoutine()
+    {
+        yield return new WaitForSeconds(5.0f);
+        _isShieldsActive = false;
+        _shieldsVisualizer.SetActive(false);
     }
 }
