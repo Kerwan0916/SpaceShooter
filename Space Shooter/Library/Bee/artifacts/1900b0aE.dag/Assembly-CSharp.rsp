@@ -353,10 +353,13 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.50f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.50f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Scripts/Enemy.cs"
+"Assets/Scripts/GameManager.cs"
 "Assets/Scripts/Laser.cs"
+"Assets/Scripts/Main_Menu/MainMenu.cs"
 "Assets/Scripts/Player.cs"
 "Assets/Scripts/Powerup.cs"
 "Assets/Scripts/SpawnManager.cs"
+"Assets/Scripts/UIManager.cs"
 -langversion:9.0
 /deterministic
 /optimize+
