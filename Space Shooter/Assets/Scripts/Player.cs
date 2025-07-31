@@ -114,7 +114,7 @@ public class Player : MonoBehaviour
         //}
 
         // optimized version
-        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.8f, 0), 0);
+        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.8f, 2.2f), 0);
 
 
         if (transform.position.x >= 11.28f)
