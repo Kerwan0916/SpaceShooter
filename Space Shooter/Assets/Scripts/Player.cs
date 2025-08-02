@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     // variable ref to visualizer
     [SerializeField]
     private GameObject _shieldsVisualizer;
+    [SerializeField] private GameObject _rightEngineDamageVisualizer;
+    [SerializeField] private GameObject _leftEngineDamageVisualizer;
     [SerializeField]
     private float _fireRate = 0.5f;
     private float _canFire = -1f;
@@ -175,6 +177,15 @@ public class Player : MonoBehaviour
 
         _uiManager.UpdateLives(_lives);
 
+        switch (_lives)
+        {
+            case 1:
+                _leftEngineDamageVisualizer.SetActive(true);
+                break;
+            case 2:
+                _rightEngineDamageVisualizer.SetActive(true);
+                break;
+        }
 
         // check if dead
         if (_lives < 1)

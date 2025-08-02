@@ -66,7 +66,7 @@ public class Enemy : MonoBehaviour
             // trigger the anim
             enemyAnimator.SetTrigger("OnEnemyDeath");
             _speed = 0;
-            Destroy(this.gameObject, 2.8f);
+            Destroy(this.gameObject, 2.6f);
         }
 
         // if other is laser
@@ -85,7 +85,7 @@ public class Enemy : MonoBehaviour
             // trigger the anim
             enemyAnimator.SetTrigger("OnEnemyDeath");
             _speed = 0;
-            Destroy(this.gameObject, 2.8f);
+            Destroy(this.gameObject, 2.6f);
         }
     }
 }
