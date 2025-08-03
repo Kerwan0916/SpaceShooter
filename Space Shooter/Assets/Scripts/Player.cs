@@ -43,6 +43,9 @@ public class Player : MonoBehaviour
 
     private UIManager _uiManager;
 
+    [SerializeField] private AudioClip _laserSoundClip;
+    [SerializeField] private AudioSource _audioSource;
+
 
     // Start is called before the first frame update
     void Start()
@@ -61,6 +64,16 @@ public class Player : MonoBehaviour
         if (_spawnManager == null)
         {
             Debug.LogError("The Spawn Manager is NULL");
+        }
+
+        _audioSource = GetComponent<AudioSource>(); 
+        if (_audioSource == null )
+        {
+            Debug.LogError("Audio Source on the player is NULL");
+        }
+        else
+        {
+            _audioSource.clip = _laserSoundClip;
         }
     }
 
@@ -156,6 +169,7 @@ public class Player : MonoBehaviour
         }
 
         // play laser audio clip
+        _audioSource.Play();
 
     }
 
