@@ -53,6 +53,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Collider2D col = GetComponent<Collider2D>();
         // if other is player
         // damage the player
         // destroy us
@@ -69,6 +70,7 @@ public class Enemy : MonoBehaviour
             enemyAnimator.SetTrigger("OnEnemyDeath");
             _speed = 0;
             _audioSource.Play();
+            col.enabled = false;
             Destroy(this.gameObject, 2.6f);
         }
 
@@ -89,6 +91,7 @@ public class Enemy : MonoBehaviour
             enemyAnimator.SetTrigger("OnEnemyDeath");
             _speed = 0;
             _audioSource.Play();
+            col.enabled = false;
             Destroy(this.gameObject, 2.6f);
         }
     }
