@@ -155,6 +155,8 @@ public class Player : MonoBehaviour
             Instantiate(_laserPrefab, transform.position + offset, Quaternion.identity);
         }
 
+        // play laser audio clip
+
     }
 
     public void Damage()
