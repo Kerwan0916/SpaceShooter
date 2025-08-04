@@ -71,7 +71,7 @@ public class Enemy : MonoBehaviour
             _speed = 0;
             _audioSource.Play();
             col.enabled = false;
-            Destroy(this.gameObject, 2.6f);
+            Destroy(this.gameObject, 1.3f);
         }
 
         // if other is laser
@@ -92,7 +92,7 @@ public class Enemy : MonoBehaviour
             _speed = 0;
             _audioSource.Play();
             col.enabled = false;
-            Destroy(this.gameObject, 2.6f);
+            Destroy(this.gameObject, 1.3f);
         }
     }
 }
