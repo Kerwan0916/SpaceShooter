@@ -8,13 +8,23 @@ public class Laser : MonoBehaviour
     [SerializeField]
     private float _speed = 8.0f;
 
+    private bool _isEnemyLaser = false;
+
     // Update is called once per frame
     void Update()
     {
-        CalculateMovement();
+        if (_isEnemyLaser == false)
+        {
+            MoveUp();
+        }
+        else
+        {
+            MoveDown();
+        }
+
     }
 
-    void CalculateMovement()
+    void MoveUp()
     {
         // LASER UPWARD MOVEMENT
         // translate laser up
@@ -37,6 +47,52 @@ public class Laser : MonoBehaviour
             }
 
             Destroy(this.gameObject);
+        }
+    }
+
+    void MoveDown()
+    {
+        // LASER UPWARD MOVEMENT
+        // translate laser up
+        Vector3 direction = new Vector3(0, -1, 0);
+        transform.Translate(direction * _speed * Time.deltaTime);
+
+
+        // LASER GARBAGE COLLECTOR
+        // if laser position is greater than 8 on the y
+        // destroy the object
+        // destroy method can also be used with a second value, being the time
+        // destroy(gameObject, after how many seconds);
+        if (transform.position.y >= -8f)
+        {
+            // check if this object has a parent
+            // destroy the parent too
+            if (transform.parent != null)
+            {
+                Destroy(transform.parent.gameObject);
+            }
+
+            Destroy(this.gameObject);
+        }
+    }
+
+    public void AssignEnemyLaser()
+    {
+        _isEnemyLaser = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Player" && _isEnemyLaser == true)
+        {
+            Player player = other.GetComponent<Player>();
+
+            if (player != null)
+            {
+                player.Damage();
+            }
+
+
         }
     }
 }
